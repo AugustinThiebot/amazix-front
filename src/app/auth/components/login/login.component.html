@@ -1,0 +1,17 @@
+<div class="login-container">
+    <form [formGroup]="myLoginForm" (ngSubmit)="onLogin()">
+        <div class="login-email">
+            <label for="email">Email :</label>
+            <input type="text" formControlName="emailControl">
+        </div>
+        <div class="login-pwd">
+            <label for="password">Password :</label>
+            <input type="password" formControlName="passwordControl">
+        </div>
+        <div class="login-pwd-again">
+            <label for="password">Password again :</label>
+            <input type="password" formControlName="passwordAgainControl">
+        </div>
+        <button type="submit" [disabled]="myLoginForm.invalid">Confirmer</button>
+    </form>
+</div>
