@@ -5,6 +5,7 @@
       <!-- <li><a routerLink="/cart">Panier</a></li> -->
       <!-- <li><a routerLink="/orders">Commandes</a></li> -->
       <li *ngIf="!isLoggedIn"><a routerLink="/auth/login">Se connecter</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/auth/sign-up">Créer un compte</a></li>
       <li *ngIf="isLoggedIn"><a (click)="logout()">Se déconnecter</a></li>
     </ul>
   </nav>

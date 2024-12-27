@@ -12,6 +12,10 @@ export class AuthService {
   login() {
     this.token = "fakeToken";
   }
+  
+  signup() {
+    this.token = "fakeToken";
+  }
 
   getToken(): string {
     return this.token;

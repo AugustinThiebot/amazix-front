@@ -1,5 +1,5 @@
 <div class="login-container">
-    <form [formGroup]="myLoginForm" (ngSubmit)="onLogin()">
+    <form [formGroup]="mySignupForm" (ngSubmit)="onSignup()">
         <div class="login-email">
             <label for="email">Email :</label>
             <input type="text" formControlName="emailControl">
@@ -8,6 +8,10 @@
             <label for="password">Password :</label>
             <input type="password" formControlName="passwordControl">
         </div>
-        <button type="submit" [disabled]="myLoginForm.valid">Confirmer</button>
+        <div class="login-pwd-again">
+            <label for="password">Password again :</label>
+            <input type="password" formControlName="passwordAgainControl">
+        </div>
+        <button type="submit" [disabled]="mySignupForm.valid">Confirmer</button>
     </form>
 </div>
