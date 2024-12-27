@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private token!: string;
+  private token: string = '';
   isLoggedIn = signal(false);
 
   constructor(private router: Router) { }
