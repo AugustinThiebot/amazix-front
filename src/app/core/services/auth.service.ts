@@ -1,10 +1,13 @@
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  readonly mockUser: User = {id: 152, firstName: 'Michel', lastName: 'Blanc', email: 'michel.blanc@gmail.com'};
 
   private token: string = '';
   isLoggedIn = signal(false);
