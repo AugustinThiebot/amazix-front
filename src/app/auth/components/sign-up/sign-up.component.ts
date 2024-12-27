@@ -23,6 +23,5 @@ export class SignUpComponent {
 
   onSignup() {
     this.auth.signup();
-    this.router.navigateByUrl('/products');
   }
 }

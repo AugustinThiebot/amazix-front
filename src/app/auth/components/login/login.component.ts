@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 
 @Component({
@@ -12,7 +11,7 @@ import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 export class LoginComponent  {
   myLoginForm: FormGroup;
 
-  constructor(private auth: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(private auth: AuthService, private fb: FormBuilder) {
     this.myLoginForm = this.fb.group({
         emailControl: ['', [Validators.required, Validators.email]],
         passwordControl: ['', [Validators.required, Validators.minLength(6)]]
@@ -21,6 +20,5 @@ export class LoginComponent  {
 
   onLogin() {
     this.auth.login();
-    this.router.navigateByUrl('/products');
   }
 }

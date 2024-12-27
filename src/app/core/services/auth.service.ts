@@ -1,20 +1,37 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
-
   private token!: string;
+  isLoggedIn = signal(false);
+
+  constructor(private router: Router) { }
+
 
   login() {
-    this.token = "fakeToken";
+    setTimeout(() => {
+      this.token = "fakeToken";
+      this.isLoggedIn.set(true);
+      this.router.navigateByUrl('/products');
+    }, 2000);
   }
   
   signup() {
-    this.token = "fakeToken";
+    setTimeout(() => {
+      this.token = "fakeToken";
+      this.isLoggedIn.set(true);
+      this.router.navigateByUrl('/products');
+    }, 2000);
+  }
+  
+  logout() {
+    this.token = "";
+    this.isLoggedIn.set(false);
+    this.router.navigateByUrl('/');
   }
 
   getToken(): string {

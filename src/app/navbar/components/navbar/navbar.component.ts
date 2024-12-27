@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -7,12 +9,16 @@ import { Component } from '@angular/core';
     standalone: false
 })
 export class NavbarComponent {
-  isLoggedIn = false; // À remplacer par un vrai service d'authentification
-
-  constructor() {}
-
+  isLoggedIn!: boolean;
+  
+  constructor(private authService: AuthService) {
+    effect(() => {
+      this.isLoggedIn = this.authService.isLoggedIn();
+    });
+  }
+  
   logout() {
-    
+    this.authService.logout();
   }
 
 }
