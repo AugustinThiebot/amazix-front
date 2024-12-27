@@ -1,0 +1,11 @@
+<nav class="navbar">
+    <a routerLink="/" class="logo">E-Commerce</a>
+    <ul class="nav-links">
+      <li><a routerLink="/products">Produits</a></li>
+      <!-- <li><a routerLink="/cart">Panier</a></li> -->
+      <!-- <li><a routerLink="/orders">Commandes</a></li> -->
+      <li *ngIf="!isLoggedIn"><a routerLink="/auth/login">Se connecter</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="logout()">Se déconnecter</a></li>
+    </ul>
+  </nav>
+  
