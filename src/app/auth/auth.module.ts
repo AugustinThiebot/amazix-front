@@ -4,6 +4,10 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 
 
@@ -15,7 +19,11 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    NzInputModule,
+    NzIconModule,
+    NzFormModule,
+    NzButtonModule
   ]
 })
 export class AuthModule { }

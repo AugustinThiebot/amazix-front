@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { CustomValidators } from '../../validators/custom-validators';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 
 @Component({
@@ -13,6 +15,8 @@ import { CustomValidators } from '../../validators/custom-validators';
 })
 export class SignUpComponent {
   mySignupForm: FormGroup;
+  passwordVisible: Boolean = false;
+  passwordAgainVisible: Boolean = false;
 
   constructor(private auth: AuthService, private router: Router, private fb: FormBuilder) {
     this.mySignupForm = this.fb.group({

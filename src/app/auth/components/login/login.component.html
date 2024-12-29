@@ -1,13 +1,22 @@
-<div class="login-container">
-    <form [formGroup]="myLoginForm" (ngSubmit)="onLogin()">
-        <div class="login-email">
-            <label for="email">Email :</label>
-            <input type="text" formControlName="emailControl">
+<div class="main-container">
+    <form nz-form [formGroup]="myLoginForm" class="login-form" (ngSubmit)="onLogin()">
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Entrez votre email">
+                <nz-input-group nzPrefixIcon="user">
+                    <input type="text" nz-input formControlName="emailControl" placeholder="Email">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Entrez votre mot de passe">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" nz-input formControlName="passwordControl" placeholder="Mot de passe">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <div class="login-form-margin">
+            <a class="login-form-forgot">Mot de passe oublié ?</a>
         </div>
-        <div class="login-pwd">
-            <label for="password">Password :</label>
-            <input type="password" formControlName="passwordControl">
-        </div>
-        <button type="submit" [disabled]="myLoginForm.valid">Confirmer</button>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [disabled]="myLoginForm.invalid">Confirmer</button>
     </form>
 </div>
