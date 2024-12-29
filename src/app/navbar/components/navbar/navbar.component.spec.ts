@@ -55,17 +55,15 @@ describe('NavbarComponent', () => {
     expect(logoutLink).toBeTruthy();
   });
 
-  // it('should call logout method when clicking on "Se déconnecter"', () => {
-  //   authServiceSpy.isLoggedIn.and.returnValue(true);
-  //   fixture.detectChanges();
-  //   component = fixture.componentInstance;
-  //   spyOn(component, 'logout').and.callThrough();;
+  it('should call logout method when clicking on "Se déconnecter"', () => {
+    authServiceSpy.isLoggedIn.and.returnValue(true);
+    fixture.detectChanges();
+    component = fixture.componentInstance;
+    spyOn(component, 'logout').and.callThrough();;
 
-  //   const logoutLink = fixture.nativeElement.querySelector('#logout');
-  //   logoutLink.triggerEventHandler('click', null);
-  //   fixture.detectChanges();
-  //   expect(component.logout).toHaveBeenCalled();
-  //   expect(authServiceSpy.logout).toHaveBeenCalled();
-  //   expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/');
-  // });
+    const logoutLink = fixture.nativeElement.querySelector('#logout-anchor');
+    logoutLink.click();
+    expect(component.logout).toHaveBeenCalled();
+    expect(authServiceSpy.logout).toHaveBeenCalled();
+  });
 });
