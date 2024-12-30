@@ -17,12 +17,12 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const userId = this.route.snapshot.paramMap.get('id');
-    const user = this.userService.users.find(u => u.id === userId);
-    this.user$ = new Observable<User | undefined>(observer => {
-      observer.next(user);
-      observer.complete();
-    });
+    // const userId = this.route.snapshot.paramMap.get('id');
+    // const user = this.userService.users.find(u => u.id === userId);
+    // this.user$ = new Observable<User | undefined>(observer => {
+    //   observer.next(user);
+    //   observer.complete();
+    // });
   }
   
 
