@@ -8,6 +8,12 @@ export interface User extends BaseUser {
     id: number;
 }
 
-export interface UserForRegistration extends BaseUser {
+export interface LoginPayload {
+    email: string;
     password: string;
-}
+  }
+  
+  export interface SignupPayload {
+    email: string;
+    password: string;
+  }

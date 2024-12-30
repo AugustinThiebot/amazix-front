@@ -1,6 +1,6 @@
 import { Component, effect } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthenticationService } from 'src/app/auth/services/authentication.service';
+import { TokenService } from 'src/app/core/services/token.service';
 
 @Component({
     selector: 'app-navbar',
@@ -11,14 +11,14 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class NavbarComponent {
   isLoggedIn!: boolean;
   
-  constructor(private authService: AuthService) {
+  constructor(private tokenService: TokenService, private authenticaionService: AuthenticationService) {
     effect(() => {
-      this.isLoggedIn = this.authService.isLoggedIn();
+      this.isLoggedIn = this.tokenService.isAuthenticated();
     });
   }
   
   logout() {
-    this.authService.logout();
+    // this.authenticaionService.logout();
   }
 
 }

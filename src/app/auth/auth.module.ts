@@ -24,6 +24,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzIconModule,
     NzFormModule,
     NzButtonModule
-  ]
+  ],
 })
 export class AuthModule { }

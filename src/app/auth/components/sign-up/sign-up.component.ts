@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { CustomValidators } from '../../validators/custom-validators';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzInputModule } from 'ng-zorro-antd/input';
+import { AuthenticationService } from '../../services/authentication.service';
+import { SignupPayload } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +17,7 @@ export class SignUpComponent {
   passwordVisible: Boolean = false;
   passwordAgainVisible: Boolean = false;
 
-  constructor(private auth: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(private authenticationService: AuthenticationService, private fb: FormBuilder, private route: Router) {
     this.mySignupForm = this.fb.group({
         emailControl: ['', [Validators.required, Validators.email]],
         passwordControl: ['', [Validators.required, CustomValidators.passwordValidator()]],
@@ -30,6 +29,20 @@ export class SignUpComponent {
   }
 
   onSignup() {
-    this.auth.signup();
+    if (this.mySignupForm.valid) {
+      var userPayload: SignupPayload = {
+        email: this.mySignupForm.controls['emailControl'].value,
+        password: this.mySignupForm.controls['passwordControl'].value
+      }
+      this.authenticationService.signup(userPayload).subscribe({
+        next: _response => {
+          alert('Votre compte a été créé avec succès !');
+          this.route.navigateByUrl('/login');
+        },
+        error: _error => {
+          alert('Échec de la création du compte. Vérifiez recommencer.');
+        }
+      });
+    }
   }
 }
