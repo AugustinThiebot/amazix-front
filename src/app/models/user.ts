@@ -1,11 +1,10 @@
-interface BaseUser {
-    firstName: string;
-    lastName: string;
+export interface User {
+    id: string;
     email: string;
 }
-
-export interface User extends BaseUser {
-    id: number;
+export interface LoginResponse {
+  token: string;
+  user: User;
 }
 
 export interface LoginPayload {
@@ -13,7 +12,7 @@ export interface LoginPayload {
     password: string;
   }
   
-  export interface SignupPayload {
-    email: string;
-    password: string;
-  }
+export interface SignupPayload {
+  email: string;
+  password: string;
+}

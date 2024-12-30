@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
-import { LoginPayload } from 'src/app/models/user';
+import { LoginPayload, LoginResponse } from 'src/app/models/user';
 import { TokenService } from 'src/app/core/services/token.service';
 import { Router } from '@angular/router';
 
@@ -27,7 +27,7 @@ export class LoginComponent  {
       password: this.myLoginForm.controls['passwordControl'].value
     };
     this.authenticationService.login(userPayload).subscribe({
-      next: (response) => {
+      next: (response : LoginResponse) => {
         this.tokenService.setToken(response.token);
         this.route.navigateByUrl('/products');
       },

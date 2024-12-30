@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
-import { User } from 'src/app/models/user';
+import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user',
@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const userId = Number(this.route.snapshot.paramMap.get('id'));
+    const userId = this.route.snapshot.paramMap.get('id');
     const user = this.userService.users.find(u => u.id === userId);
     this.user$ = new Observable<User | undefined>(observer => {
       observer.next(user);
