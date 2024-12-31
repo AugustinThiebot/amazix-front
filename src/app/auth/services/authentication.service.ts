@@ -15,7 +15,7 @@ export class AuthenticationService {
 
   login(user: LoginPayload): Observable<any> {
     let url = `${this.baseUrl}/login`
-    return this.http.post(url, user);
+    return this.http.post(url, user, {withCredentials: true});
   }
   
   signup(user: SignupPayload): Observable<any> {

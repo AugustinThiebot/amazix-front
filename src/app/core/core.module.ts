@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthModule } from '../auth/auth.module';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { tokenInterceptor } from './interceptors/token.interceptor';
+import { provideHttpClient } from '@angular/common/http';
 import { TokenService } from './services/token.service';
 
 
@@ -14,7 +12,7 @@ import { TokenService } from './services/token.service';
   ],
   providers: [
     TokenService,
-    provideHttpClient(withInterceptors([tokenInterceptor]))
+    provideHttpClient()
   ]
 })
 export class CoreModule { }
