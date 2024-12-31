@@ -28,7 +28,6 @@ export class LoginComponent  {
     };
     this.authenticationService.login(userPayload).subscribe({
       next: (response : LoginResponse) => {
-        // this.tokenService.setToken(response.token);
         this.route.navigateByUrl('/products');
       },
       error: (_error) => {

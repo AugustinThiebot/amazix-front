@@ -23,8 +23,8 @@ export class AuthenticationService {
     return this.http.post(url, user);
   }
 
-  // logout(): Observable<any> {
-  //   let url = `${this.baseUrl}/logout`
-  //   return this.http.post(url);
-  // }
+  logout(): Observable<any> {
+    let url = `${this.baseUrl}/logout`
+    return this.http.post(url, {}, {withCredentials: true});
+  }
 }

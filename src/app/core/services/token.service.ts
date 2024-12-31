@@ -20,7 +20,7 @@ export class TokenService {
   //   localStorage.removeItem('token');
   // }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return !!document.cookie.match(/auth_token=/);
     // const token = this.getToken();
     // return !!token && jwtDecode(token).exp! > Date.now() / 1000

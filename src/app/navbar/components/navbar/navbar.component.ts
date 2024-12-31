@@ -1,5 +1,4 @@
 import { Component, effect } from '@angular/core';
-import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 import { TokenService } from 'src/app/core/services/token.service';
 
 @Component({
@@ -11,14 +10,9 @@ import { TokenService } from 'src/app/core/services/token.service';
 export class NavbarComponent {
   isLoggedIn!: boolean;
   
-  constructor(private tokenService: TokenService, private authenticaionService: AuthenticationService) {
+  constructor(private tokenService: TokenService) {
     effect(() => {
       this.isLoggedIn = this.tokenService.isAuthenticated();
     });
   }
-  
-  logout() {
-    // this.authenticaionService.logout();
-  }
-
 }
