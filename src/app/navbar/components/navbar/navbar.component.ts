@@ -1,5 +1,5 @@
-import { Component, effect } from '@angular/core';
-import { TokenService } from 'src/app/core/services/token.service';
+import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 
 @Component({
     selector: 'app-navbar',
@@ -8,11 +8,9 @@ import { TokenService } from 'src/app/core/services/token.service';
     standalone: false
 })
 export class NavbarComponent {
-  isLoggedIn!: boolean;
+  isLoggedIn = this.authService.isConnected;
   
-  constructor(private tokenService: TokenService) {
-    effect(() => {
-      this.isLoggedIn = this.tokenService.isAuthenticated();
-    });
+  constructor(private authService: AuthenticationService) {
+
   }
 }
