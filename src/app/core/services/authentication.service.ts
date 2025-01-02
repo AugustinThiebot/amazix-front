@@ -16,21 +16,33 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   login(user: LoginPayload): Observable<any> {
-    let url = `${this.baseUrl}/login`
+    let url = `${this.baseUrl}/login`;
     return this.http.post(url, user, {withCredentials: true});
   }
   
   signup(user: SignupPayload): Observable<any> {
-    let url = `${this.baseUrl}/register`
+    let url = `${this.baseUrl}/register`;
     return this.http.post(url, user);
   }
 
   logout(): Observable<any> {
-    let url = `${this.baseUrl}/logout`
+    let url = `${this.baseUrl}/logout`;
     return this.http.post(url, {}, {withCredentials: true});
   }
 
   setUser(user: User | null) {
     this._currentUser.set(user);
+  }
+
+  checkAuth$(): Observable<User | null> {
+    let url = `${this.baseUrl}/current-user`;
+    return this.http.get<User|null>(url, {withCredentials: true});
+  }
+
+  initializeUserState() {
+    this.checkAuth$().subscribe({
+      next: (user) => this.setUser(user),
+      error: () => this.setUser(null)
+    });
   }
 }

@@ -1,7 +1,11 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { AuthenticationService } from './services/authentication.service';
 
+export function initAuth(authService: AuthenticationService) {
+  return authService.initializeUserState();
+}
 
 
 @NgModule({
@@ -10,6 +14,7 @@ import { provideHttpClient } from '@angular/common/http';
     CommonModule
   ],
   providers: [
+    provideAppInitializer(() => initAuth(inject(AuthenticationService))),
     provideHttpClient()
   ]
 })

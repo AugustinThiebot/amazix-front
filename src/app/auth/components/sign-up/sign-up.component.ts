@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { CustomValidators } from '../../validators/custom-validators';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 import { SignupPayload } from 'src/app/models/user';
 import { Router } from '@angular/router';
 
