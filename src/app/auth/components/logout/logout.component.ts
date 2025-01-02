@@ -22,7 +22,6 @@ export class LogoutComponent {
       },
       error: (err: any) => {
         console.error('Logout failed', err);
-        alert('Erreur lors de la déconnexion');
       }
     });
   }

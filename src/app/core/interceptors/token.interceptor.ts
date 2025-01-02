@@ -16,6 +16,12 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
             router.navigate(['auth/login']);
           }
         }
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          authService.setUser(null);
+          router.navigate(['auth/login']);
+        }
       }
     })
   );
