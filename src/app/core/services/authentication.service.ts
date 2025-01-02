@@ -13,7 +13,9 @@ export class AuthenticationService {
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.setUser(this.getUser());
+  }
 
   login$(user: LoginPayload): Observable<any> {
     let url = `${this.baseAuthUrl}/login`;
@@ -30,7 +32,14 @@ export class AuthenticationService {
     return this.http.post(url, {}, {withCredentials: true});
   }
 
-  setUser(user: User | null) {
+  setUser(user: User | null): void {
     this._currentUser.set(user);
+    if (user) localStorage.setItem('user', JSON.stringify(user));
+    else localStorage.removeItem('user');
+  }
+
+  getUser(): User | null {
+    const userStored = localStorage.getItem('user');
+    return userStored ? JSON.parse(userStored):null;
   }
 }
