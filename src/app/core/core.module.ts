@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { tokenInterceptor } from './interceptors/token.interceptor';
 
 
 
@@ -10,6 +11,7 @@ import { provideHttpClient } from '@angular/common/http';
     CommonModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useValue: tokenInterceptor, multi: true},
     provideHttpClient()
   ]
 })
