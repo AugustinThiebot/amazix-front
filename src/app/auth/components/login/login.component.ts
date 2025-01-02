@@ -25,7 +25,7 @@ export class LoginComponent  {
       email: this.myLoginForm.controls['emailControl'].value,
       password: this.myLoginForm.controls['passwordControl'].value
     };
-    this.authenticationService.login(userPayload).subscribe({
+    this.authenticationService.login$(userPayload).subscribe({
       next: (response : User) => {
         this.authenticationService.setUser(response);
         this.route.navigateByUrl('/products');

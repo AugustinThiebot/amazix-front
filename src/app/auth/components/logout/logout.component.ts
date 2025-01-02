@@ -15,7 +15,7 @@ export class LogoutComponent {
   }
 
   logoutUser() {
-    this.authenticationService.logout().subscribe({
+    this.authenticationService.logout$().subscribe({
       next: () => {
         this.authenticationService.setUser(null);
         this.router.navigateByUrl('auth/login');

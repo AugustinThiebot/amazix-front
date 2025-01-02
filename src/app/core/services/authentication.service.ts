@@ -8,41 +8,29 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private baseUrl = `${environment.apiUrl}/Auth`;
+  private baseAuthUrl = `${environment.apiUrl}/Auth`;
   private _currentUser = signal<User | null>(null);
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
 
   constructor(private http: HttpClient) { }
 
-  login(user: LoginPayload): Observable<any> {
-    let url = `${this.baseUrl}/login`;
+  login$(user: LoginPayload): Observable<any> {
+    let url = `${this.baseAuthUrl}/login`;
     return this.http.post(url, user, {withCredentials: true});
   }
   
-  signup(user: SignupPayload): Observable<any> {
-    let url = `${this.baseUrl}/register`;
+  signup$(user: SignupPayload): Observable<any> {
+    let url = `${this.baseAuthUrl}/register`;
     return this.http.post(url, user);
   }
 
-  logout(): Observable<any> {
-    let url = `${this.baseUrl}/logout`;
+  logout$(): Observable<any> {
+    let url = `${this.baseAuthUrl}/logout`;
     return this.http.post(url, {}, {withCredentials: true});
   }
 
   setUser(user: User | null) {
     this._currentUser.set(user);
-  }
-
-  checkAuth$(): Observable<User | null> {
-    let url = `${this.baseUrl}/current-user`;
-    return this.http.get<User|null>(url, {withCredentials: true});
-  }
-
-  initializeUserState() {
-    this.checkAuth$().subscribe({
-      next: (user) => this.setUser(user),
-      error: () => this.setUser(null)
-    });
   }
 }

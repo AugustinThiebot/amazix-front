@@ -34,7 +34,7 @@ export class SignUpComponent {
         email: this.mySignupForm.controls['emailControl'].value,
         password: this.mySignupForm.controls['passwordControl'].value
       }
-      this.authenticationService.signup(userPayload).subscribe({
+      this.authenticationService.signup$(userPayload).subscribe({
         next: _response => {
           alert('Votre compte a été créé avec succès !');
           this.route.navigateByUrl('/login');
