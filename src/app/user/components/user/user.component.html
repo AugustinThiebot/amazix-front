@@ -1,6 +1,6 @@
-<div class="user-container" *ngIf="user">
+<div class="user-container" *ngIf="user()">
     <h2>Voici les informations dont nous disposons sur vous :</h2>
     <!-- <p><strong>Prénom : </strong>{{user.firstName}}</p>
-    <p><strong>Nom de famille : </strong>{{user.lastName}}</p>
-    <p><strong>Email : </strong>{{user.email}}</p> -->
+    <p><strong>Nom de famille : </strong>{{user.lastName}}</p> -->
+    <p><strong>Email : </strong>{{user()?.email}}</p>
 </div>
