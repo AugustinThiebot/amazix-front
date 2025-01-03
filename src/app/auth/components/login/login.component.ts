@@ -28,7 +28,8 @@ export class LoginComponent  {
     this.authenticationService.login$(userPayload).subscribe({
       next: (response : User) => {
         this.authenticationService.setUser(response);
-        this.route.navigateByUrl('/products');
+        const userGuid = response.userGuid;
+        this.route.navigateByUrl(`/user/${userGuid}`);
       },
       error: (_error) => {
         alert('Échec de la connexion. Vérifiez vos identificants');

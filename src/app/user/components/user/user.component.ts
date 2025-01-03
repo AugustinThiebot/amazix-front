@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-user',
@@ -12,17 +13,12 @@ import { User } from 'src/app/models/user';
 })
 export class UserComponent implements OnInit {
 
-  user$!: Observable<User | undefined>;
+  user = computed(() => this.authService.currentUser());
 
-  constructor(private userService: UserService, private route: ActivatedRoute) {}
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit() {
-    // const userId = this.route.snapshot.paramMap.get('id');
-    // const user = this.userService.users.find(u => u.id === userId);
-    // this.user$ = new Observable<User | undefined>(observer => {
-    //   observer.next(user);
-    //   observer.complete();
-    // });
+
   }
   
 
