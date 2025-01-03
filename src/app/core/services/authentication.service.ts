@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { LoginPayload, SignupPayload, User } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
 
@@ -41,5 +41,13 @@ export class AuthenticationService {
   getUser(): User | null {
     const userStored = localStorage.getItem('user');
     return userStored ? JSON.parse(userStored):null;
+  }
+
+  validateToken(): Promise<boolean> {
+    let url = `${this.baseAuthUrl}/validate-token`;
+    return firstValueFrom(this.http.get<{valid:boolean}>(url, {withCredentials: true})).then(
+      response => response.valid,
+      () => false
+    );
   }
 }
