@@ -17,11 +17,11 @@ export class LogoutComponent {
   logoutUser() {
     this.authenticationService.logout$().subscribe({
       next: () => {
-        this.authenticationService.setUser(null);
-        this.router.navigateByUrl('auth/login');
+        this.authenticationService.revokeToken();
       },
       error: (err: any) => {
         console.error('Logout failed', err);
+        this.authenticationService.revokeToken();
       }
     });
   }

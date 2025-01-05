@@ -7,11 +7,7 @@ import { Router } from '@angular/router';
 
 export function appInitilizerValidateToken(): Promise<void> {
   const authService = inject(AuthenticationService);
-  const router = inject(Router);
-  return authService.validateToken().then(isValid => {
-    if (!isValid) {
-      router.navigate(['auth/logout']);
-    }
+  return authService.validateToken().then(_isValid => {
   })
 }
 

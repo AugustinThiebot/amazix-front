@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { firstValueFrom, Observable } from 'rxjs';
 import { LoginPayload, SignupPayload, User } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
@@ -8,12 +9,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private baseAuthUrl = `${environment.apiUrl}/Auth`;
+  private readonly baseAuthUrl = `${environment.apiUrl}/Auth`;
   private _currentUser = signal<User | null>(null);
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.setUser(this.getUser());
   }
 
@@ -43,11 +44,21 @@ export class AuthenticationService {
     return userStored ? JSON.parse(userStored):null;
   }
 
+  revokeToken() {
+    this.setUser(null);
+    this.router.navigate(['auth/login']);
+  }
+
   validateToken(): Promise<boolean> {
     let url = `${this.baseAuthUrl}/validate-token`;
     return firstValueFrom(this.http.get<{valid:boolean}>(url, {withCredentials: true})).then(
       response => response.valid,
       () => false
     );
+  }
+
+  refreshToken() {
+    let url = `${this.baseAuthUrl}/refresh`;
+    return this.http.post(url, {UserId: this.currentUser()?.userGuid}, {withCredentials: true});
   }
 }
