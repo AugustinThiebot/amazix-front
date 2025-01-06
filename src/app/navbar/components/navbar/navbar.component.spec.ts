@@ -1,22 +1,27 @@
-import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
 import { Router } from '@angular/router';
-import { TokenService } from 'src/app/core/services/token.service';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { computed, signal } from '@angular/core';
+import { User } from 'src/app/models/user';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
-  let tokenServiceSpy: jasmine.SpyObj<TokenService>;
+  let authServiceSpy: jasmine.SpyObj<AuthenticationService>;
   let routerSpy: jasmine.SpyObj<Router>;
+  let _currentUser: ReturnType<typeof signal>;
 
   beforeEach(() => {
-    tokenServiceSpy = jasmine.createSpyObj('AuthService', ['isLoggedIn', 'logout']);
+    _currentUser = signal(<User | null>(null));
+    let isConnected = computed(() => _currentUser() !== null);
+    authServiceSpy = jasmine.createSpyObj('AuthService',['logout$'], {isConnected: isConnected});
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
     TestBed.configureTestingModule({
       declarations: [NavbarComponent],
       providers: [
-        { provide: TokenService, useValue: tokenServiceSpy },
+        { provide: AuthenticationService, useValue: authServiceSpy },
         { provide: Router, useValue: routerSpy },
       ],
     }).compileComponents();
@@ -26,7 +31,7 @@ describe('NavbarComponent', () => {
   });
 
   it('should display "Se connecter" and "Créer un compte" when user is not logged in', () => {
-    tokenServiceSpy.isAuthenticated.and.returnValue(false);
+    _currentUser.set(null);
     fixture.detectChanges();
 
     const loginLink = fixture.nativeElement.querySelector('#login');
@@ -41,7 +46,7 @@ describe('NavbarComponent', () => {
   });
 
   it('should display "Mon compte" and "Se déconnecter" when user is logged in', () => {
-    tokenServiceSpy.isAuthenticated.and.returnValue(true);
+    _currentUser.set({ userGuid: '1234', email: 'test@example.com' });
     fixture.detectChanges();
 
     const loginLink = fixture.nativeElement.querySelector('#login');
@@ -56,7 +61,7 @@ describe('NavbarComponent', () => {
   });
 
   // it('should call logout method when clicking on "Se déconnecter"', () => {
-  //   tokenServiceSpy.isLoggedIn.and.returnValue(true);
+  //   authServiceSpy.isLoggedIn.and.returnValue(true);
   //   fixture.detectChanges();
   //   component = fixture.componentInstance;
   //   spyOn(component, 'logout').and.callThrough();;
@@ -64,6 +69,6 @@ describe('NavbarComponent', () => {
   //   const logoutLink = fixture.nativeElement.querySelector('#logout-anchor');
   //   logoutLink.click();
   //   expect(component.logout).toHaveBeenCalled();
-  //   expect(tokenServiceSpy.logout).toHaveBeenCalled();
+  //   expect(authServiceSpy.logout).toHaveBeenCalled();
   // });
 });
