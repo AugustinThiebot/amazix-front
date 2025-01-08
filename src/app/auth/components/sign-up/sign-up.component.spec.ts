@@ -4,6 +4,10 @@ import { SignUpComponent } from './sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Router } from '@angular/router';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -16,7 +20,7 @@ describe('SignUpComponent', () => {
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
     await TestBed.configureTestingModule({
       declarations: [SignUpComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, NzInputModule, NzIconModule, NzFormModule, NzButtonModule],
       providers: [
         {provide: AuthenticationService, useValue: authServiceSpy},
         {provide: Router, useValue: routerSpy}

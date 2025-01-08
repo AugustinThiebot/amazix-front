@@ -6,8 +6,10 @@ import { AuthenticationService } from './services/authentication.service';
 
 export function appInitilizerValidateToken(): Promise<void> {
   const authService = inject(AuthenticationService);
-  return authService.validateToken().then(_isValid => {
-  });
+  return authService.validateToken().then(
+    _isValid => {},
+    () => {}
+  );
 }
 
 
