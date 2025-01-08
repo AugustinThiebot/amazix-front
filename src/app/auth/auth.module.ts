@@ -8,13 +8,15 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,

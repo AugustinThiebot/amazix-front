@@ -1,6 +1,6 @@
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXsrfConfiguration } from '@angular/common/http';
 import { tokenInterceptor } from './interceptors/token.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 
@@ -18,7 +18,7 @@ export function appInitilizerValidateToken(): Promise<void> {
   ],
   providers: [
     provideAppInitializer(() => appInitilizerValidateToken()),
-    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideHttpClient(withInterceptors([tokenInterceptor]), withXsrfConfiguration({cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN'})),
   ]
 })
 export class CoreModule { }
