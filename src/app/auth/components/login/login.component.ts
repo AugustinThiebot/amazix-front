@@ -11,19 +11,19 @@ import { Router } from '@angular/router';
     standalone: false
 })
 export class LoginComponent  {
-  myLoginForm: FormGroup;
+  loginForm: FormGroup;
 
   constructor(private authenticationService: AuthenticationService, private fb: FormBuilder, private route: Router) {
-    this.myLoginForm = this.fb.group({
+    this.loginForm = this.fb.group({
         emailControl: ['', [Validators.required, Validators.email]],
-        passwordControl: ['', [Validators.required, Validators.minLength(6)]]
+        passwordControl: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
   onLogin() {
     var userPayload: LoginPayload = {
-      email: this.myLoginForm.controls['emailControl'].value,
-      password: this.myLoginForm.controls['passwordControl'].value
+      email: this.loginForm.controls['emailControl'].value,
+      password: this.loginForm.controls['passwordControl'].value
     };
     this.authenticationService.login$(userPayload).subscribe({
       next: (response : User) => {

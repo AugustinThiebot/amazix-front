@@ -1,5 +1,5 @@
 <div class="main-container">
-    <form nz-form [formGroup]="myLoginForm" class="login-form" (ngSubmit)="onLogin()">
+    <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="onLogin()">
         <nz-form-item>
             <nz-form-control nzErrorTip="Entrez votre email">
                 <nz-input-group nzPrefixIcon="user">
@@ -17,6 +17,6 @@
         <div class="login-form-margin">
             <a class="login-form-forgot">Mot de passe oublié ?</a>
         </div>
-        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [disabled]="myLoginForm.invalid">Confirmer</button>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [disabled]="loginForm.invalid">Confirmer</button>
     </form>
 </div>

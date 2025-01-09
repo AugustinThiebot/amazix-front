@@ -13,12 +13,12 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class SignUpComponent {
-  mySignupForm: FormGroup;
+  signupForm: FormGroup;
   passwordVisible: Boolean = false;
   passwordAgainVisible: Boolean = false;
 
   constructor(private authenticationService: AuthenticationService, private fb: FormBuilder, private route: Router) {
-    this.mySignupForm = this.fb.group({
+    this.signupForm = this.fb.group({
         emailControl: ['', [Validators.required, Validators.email]],
         passwordControl: ['', [Validators.required, CustomValidators.passwordValidator()]],
         passwordAgainControl: ['', [Validators.required, CustomValidators.passwordValidator()]]
@@ -29,10 +29,10 @@ export class SignUpComponent {
   }
 
   onSignup() {
-    if (this.mySignupForm.valid) {
+    if (this.signupForm.valid) {
       var userPayload: SignupPayload = {
-        email: this.mySignupForm.controls['emailControl'].value,
-        password: this.mySignupForm.controls['passwordControl'].value
+        email: this.signupForm.controls['emailControl'].value,
+        password: this.signupForm.controls['passwordControl'].value
       }
       this.authenticationService.signup$(userPayload).subscribe({
         next: _response => {

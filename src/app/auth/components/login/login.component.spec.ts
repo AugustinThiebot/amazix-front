@@ -27,4 +27,28 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be invalid with empty form', () => {
+    component.loginForm['controls']["emailControl"].setValue("");
+    component.loginForm['controls']["passwordControl"].setValue("");
+    expect(component.loginForm.valid).toBeFalsy();
+  });
+
+  it('should be invalid with invalid mail', () => {
+    component.loginForm['controls']["emailControl"].setValue("OneUser");
+    component.loginForm['controls']["passwordControl"].setValue("V@lidP@ssword123!");
+    expect(component.loginForm.valid).toBeFalsy();
+  });
+
+  it('should be invalid with short password', () => {
+    component.loginForm['controls']["emailControl"].setValue("example@mail.com");
+    component.loginForm['controls']["passwordControl"].setValue("1234567");
+    expect(component.loginForm.valid).toBeFalsy();
+  });
+
+  it('should be valid with valid mail & password', () => {
+    component.loginForm['controls']["emailControl"].setValue("example@mail.com");
+    component.loginForm['controls']["passwordControl"].setValue("V@lidPassword123!");
+    expect(component.loginForm.valid).toBeTruthy();
+  });
 });

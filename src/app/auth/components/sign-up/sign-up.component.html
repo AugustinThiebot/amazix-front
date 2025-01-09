@@ -1,5 +1,5 @@
 <div class="main-container">
-    <form [formGroup]="mySignupForm" (ngSubmit)="onSignup()">
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
         <div class="login-email">
             <label for="email">Email :</label>
             <input type="text" formControlName="emailControl">
@@ -16,7 +16,7 @@
                 <input nz-input [type]="passwordAgainVisible ? 'text':'password'" formControlName="passwordAgainControl" >
             </nz-input-group>
         </div>
-        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [disabled]="mySignupForm.invalid">Confirmer</button>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [disabled]="signupForm.invalid">Confirmer</button>
     </form>
 </div>
 
