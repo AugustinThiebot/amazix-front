@@ -14,16 +14,16 @@
 //     expect(app).toBeTruthy();
 //   });
 
-//   it(`should have as title 'angular-commerce'`, () => {
+//   it(`should have as title 'amazix-front'`, () => {
 //     const fixture = TestBed.createComponent(AppComponent);
 //     const app = fixture.componentInstance;
-//     expect(app.title).toEqual('angular-commerce');
+//     expect(app.title).toEqual('amazix-front');
 //   });
 
 //   it('should render title', () => {
 //     const fixture = TestBed.createComponent(AppComponent);
 //     fixture.detectChanges();
 //     const compiled = fixture.nativeElement as HTMLElement;
-//     expect(compiled.querySelector('.content span')?.textContent).toContain('angular-commerce app is running!');
+//     expect(compiled.querySelector('.content span')?.textContent).toContain('amazix-front app is running!');
 //   });
 // });
