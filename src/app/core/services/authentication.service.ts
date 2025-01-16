@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
   private readonly baseAuthUrl = `${environment.apiUrl}/Auth`;
+  private readonly baseRegistrationUrl = `${environment.apiUrl}/Registration`;
   private _currentUser = signal<User | null>(null);
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
@@ -24,7 +25,7 @@ export class AuthenticationService {
   }
   
   signup$(user: SignupPayload): Observable<any> {
-    let url = `${this.baseAuthUrl}/register`;
+    let url = `${this.baseRegistrationUrl}/register`;
     return this.http.post(url, user);
   }
 
