@@ -25,7 +25,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     NzInputModule,
     NzIconModule,
     NzFormModule,
-    NzButtonModule
+    NzButtonModule    
   ],
 })
 export class AuthModule { }
