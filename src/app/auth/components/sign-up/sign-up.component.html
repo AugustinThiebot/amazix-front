@@ -1,22 +1,22 @@
 <div class="main-container">
     <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
-        <div class="login-email">
+        <div class="signup-email">
             <label for="email">Email :</label>
-            <input type="text" formControlName="emailControl">
+            <input type="text" nz-input formControlName="emailControl" placeholder="example@mail.com">
         </div>
-        <div class="login-pwd">
+        <div class="signup-pwd">
             <label for="password">Password :</label>        
             <nz-input-group [nzSuffix]="suffixTemplate1">
                 <input nz-input [type]="passwordVisible ? 'text':'password'" formControlName="passwordControl" >
             </nz-input-group>
         </div>
-        <div class="login-pwd-again">
+        <div class="signup-pwd-again">
             <label for="password">Password again :</label>
             <nz-input-group [nzSuffix]="suffixTemplate2">
                 <input nz-input [type]="passwordAgainVisible ? 'text':'password'" formControlName="passwordAgainControl" >
             </nz-input-group>
         </div>
-        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [disabled]="signupForm.invalid">Confirmer</button>
+        <button nz-button class="signup-form-button signup-form-margin" [nzType]="'primary'" [disabled]="signupForm.invalid">Confirmer</button>
     </form>
 </div>
 

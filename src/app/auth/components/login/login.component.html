@@ -2,13 +2,15 @@
     <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="onLogin()">
         <nz-form-item>
             <nz-form-control nzErrorTip="Entrez votre email">
+                <label for="email">Email :</label>
                 <nz-input-group nzPrefixIcon="user">
-                    <input type="text" nz-input formControlName="emailControl" placeholder="Email">
+                    <input type="text" nz-input formControlName="emailControl" placeholder="exampe@mail.com">
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
             <nz-form-control nzErrorTip="Entrez votre mot de passe">
+                <label for="password">Password :</label>
                 <nz-input-group nzPrefixIcon="lock">
                     <input type="password" nz-input formControlName="passwordControl" placeholder="Mot de passe">
                 </nz-input-group>
