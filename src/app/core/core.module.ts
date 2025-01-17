@@ -4,12 +4,20 @@ import { provideHttpClient, withInterceptors, withXsrfConfiguration } from '@ang
 import { tokenInterceptor } from './interceptors/token.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 
-export function appInitilizerValidateToken(): Promise<void> {
+export function appInitilizerCheckTokenValidity(): Promise<void> {
   const authService = inject(AuthenticationService);
-  return authService.validateToken().then(
+  return authService.checkTokenValidity().then(
     _isValid => {},
     () => {}
   );
+}
+
+export function appInitilizerGetXsrfToken(): Promise<any> {
+  const authService = inject(AuthenticationService);
+  return authService.xsrfToken().then(
+    _ => {},
+    () => {}
+  )
 }
 
 
@@ -19,7 +27,8 @@ export function appInitilizerValidateToken(): Promise<void> {
     CommonModule
   ],
   providers: [
-    provideAppInitializer(() => appInitilizerValidateToken()),
+    provideAppInitializer(() => appInitilizerCheckTokenValidity()),
+    provideAppInitializer(() => appInitilizerGetXsrfToken()),
     provideHttpClient(withInterceptors([tokenInterceptor]), withXsrfConfiguration({cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN'})),
   ]
 })

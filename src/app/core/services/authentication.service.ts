@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
   private readonly baseAuthUrl = `${environment.apiUrl}/Auth`;
   private readonly baseRegistrationUrl = `${environment.apiUrl}/Registration`;
+  private readonly baseXsrfUrl = `${environment.apiUrl}/Xsrf`;
   private _currentUser = signal<User | null>(null);
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
@@ -50,7 +51,7 @@ export class AuthenticationService {
     this.router.navigate(['auth/login']);
   }
 
-  validateToken(): Promise<boolean> {
+  checkTokenValidity(): Promise<boolean> {
     let url = `${this.baseAuthUrl}/validate-token`;
     return firstValueFrom(this.http.get<{valid:boolean}>(url, {withCredentials: true})).then(
       response => response.valid,
@@ -61,5 +62,10 @@ export class AuthenticationService {
   refreshToken() {
     let url = `${this.baseAuthUrl}/refresh`;
     return this.http.post(url, {UserId: this.currentUser()?.userGuid}, {withCredentials: true});
+  }
+
+  xsrfToken(): Promise<any> {
+    let url = `${this.baseXsrfUrl}/xsrf`;
+    return firstValueFrom(this.http.get<{elment:any}>(url, {withCredentials: true}));
   }
 }
