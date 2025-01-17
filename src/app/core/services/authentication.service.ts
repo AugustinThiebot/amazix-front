@@ -15,6 +15,7 @@ export class AuthenticationService {
   private _currentUser = signal<User | null>(null);
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
+  userId = computed(() => this.currentUser()?.userGuid );
 
   constructor(private http: HttpClient, private router: Router) {
     this.setUser(this.getUser());

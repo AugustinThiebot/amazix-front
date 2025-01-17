@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 })
 export class NavbarComponent {
   isLoggedIn = this.authService.isConnected;
+  userId = this.authService.userId;
   
   constructor(private authService: AuthenticationService) {
 

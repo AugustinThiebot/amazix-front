@@ -6,7 +6,7 @@
       <!-- <li><a routerLink="/orders">Commandes</a></li> -->
       <li id="login" *ngIf="!isLoggedIn()"><a routerLink="/auth/login">Se connecter</a></li>
       <li id="sign-up" *ngIf="!isLoggedIn()"><a routerLink="/auth/sign-up">Créer un compte</a></li>
-      <li id="account" *ngIf="isLoggedIn()"><a routerLink="/account">Mon compte</a></li>
+      <li id="account" *ngIf="isLoggedIn()"><a routerLink="/account/{{userId()}}">Mon compte</a></li>
       <li id="logout" *ngIf="isLoggedIn()"><a routerLink="/auth/logout">Se déconnecter</a></li>
     </ul>
   </nav>
