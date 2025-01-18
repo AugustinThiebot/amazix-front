@@ -7,10 +7,8 @@ import { Router } from '@angular/router';
 
 describe('UsersService', () => {
   let service: UserService;
-  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     let store: { [key: string] : any} = {};
     const mockLocalStorage = {
       getItem: (key: string) => key in store ? store[key]:null,
@@ -26,8 +24,7 @@ describe('UsersService', () => {
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(),
-        provideHttpClientTesting(),
-        {provide: Router, useValue: routerSpy}
+        provideHttpClientTesting()
       ]
     });
     service = TestBed.inject(UserService);
@@ -59,6 +56,5 @@ describe('UsersService', () => {
     spyOn(service, 'deleteUser').and.callThrough();
     service.revokeUser();
     expect(service.deleteUser).toHaveBeenCalled();
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['auth/login']);
   });
 });

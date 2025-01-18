@@ -25,7 +25,6 @@ export class UserService {
 
   revokeUser() {
     this.deleteUser();
-    this.router.navigate(['auth/login']);
   }
 
   deleteUser() {

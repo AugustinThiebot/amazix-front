@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { UserService } from 'src/app/user/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logout',
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/user/services/user.service';
 })
 export class LogoutComponent {
 
-  constructor(private authenticationService: AuthenticationService, private userService: UserService) {
+  constructor(private authenticationService: AuthenticationService, private userService: UserService, private router: Router) {
     this.logoutUser();
   }
 
@@ -18,10 +19,11 @@ export class LogoutComponent {
     this.authenticationService.logout$().subscribe({
       next: () => {
         this.userService.revokeUser();
+        this.router.navigate(['auth/login']);
       },
       error: (err: any) => {
-        console.error('Logout failed', err);
         this.userService.revokeUser();
+        this.router.navigate(['auth/login']);
       }
     });
   }
