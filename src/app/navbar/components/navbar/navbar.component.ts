@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
     selector: 'app-navbar',
@@ -8,10 +8,10 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
     standalone: false
 })
 export class NavbarComponent {
-  isLoggedIn = this.authService.isConnected;
-  userId = this.authService.userId;
+  isLoggedIn = this.userService.isConnected;
+  userId = this.userService.userId;
   
-  constructor(private authService: AuthenticationService) {
+  constructor(private userService: UserService) {
 
   }
 }

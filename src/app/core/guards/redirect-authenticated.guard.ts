@@ -1,11 +1,11 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
 import { inject } from '@angular/core';
+import { UserService } from 'src/app/user/services/user.service';
 
 export const redirectAuthenticatedGuard: CanActivateFn = (route, state) => {
-  const authService = inject(AuthenticationService);
+  const userService = inject(UserService);
   const router = inject(Router);
-  if (authService.isConnected()) {
+  if (userService.isConnected()) {
     router.navigate(['/products']);
     return false;
   }

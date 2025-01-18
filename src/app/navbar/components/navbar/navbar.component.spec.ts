@@ -1,27 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { computed, signal } from '@angular/core';
 import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/user/services/user.service';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
-  let authServiceSpy: jasmine.SpyObj<AuthenticationService>;
+  let userServiceSpy: jasmine.SpyObj<UserService>;
   let routerSpy: jasmine.SpyObj<Router>;
   let _currentUser: ReturnType<typeof signal>;
 
   beforeEach(() => {
     _currentUser = signal(<User | null>(null));
     let isConnected = computed(() => _currentUser() !== null);
-    authServiceSpy = jasmine.createSpyObj('AuthService',['logout$'], {isConnected: isConnected});
+    userServiceSpy = jasmine.createSpyObj('AuthService',['logout$'], {isConnected: isConnected});
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
     TestBed.configureTestingModule({
       declarations: [NavbarComponent],
       providers: [
-        { provide: AuthenticationService, useValue: authServiceSpy },
+        { provide: UserService, useValue: userServiceSpy },
         { provide: Router, useValue: routerSpy },
       ],
     }).compileComponents();
@@ -61,7 +61,7 @@ describe('NavbarComponent', () => {
   });
 
   // it('should call logout method when clicking on "Se déconnecter"', () => {
-  //   authServiceSpy.isLoggedIn.and.returnValue(true);
+  //   userServiceSpy.isLoggedIn.and.returnValue(true);
   //   fixture.detectChanges();
   //   component = fixture.componentInstance;
   //   spyOn(component, 'logout').and.callThrough();;
@@ -69,6 +69,6 @@ describe('NavbarComponent', () => {
   //   const logoutLink = fixture.nativeElement.querySelector('#logout-anchor');
   //   logoutLink.click();
   //   expect(component.logout).toHaveBeenCalled();
-  //   expect(authServiceSpy.logout).toHaveBeenCalled();
+  //   expect(userServiceSpy.logout).toHaveBeenCalled();
   // });
 });
