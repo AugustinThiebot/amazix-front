@@ -1,6 +1,6 @@
 export interface User {
   userGuid: string;
-  email: User;
+  email: string;
 }
 
 export interface LoginPayload {

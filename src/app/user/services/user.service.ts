@@ -9,38 +9,18 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  private readonly baseUserUrl = `${environment.apiUrl}/User`;
   private _currentUser = signal<User | null>(null);
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
   userId = computed(() => this.currentUser()?.userGuid );
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.getUser()
-      .then((user:User) => this.setUser(user))
-      .catch(this.handleError); 
+  constructor(private router: Router) {
   }
-  
-  user(): Promise<User> {
-    let url = `${this.baseUserUrl}`;
-    return firstValueFrom(this.http.get<User>(url, {withCredentials: true}));
-  }
-  
-  setUser(user: User): void {
-    if (user) {
-      this._currentUser.set(user);
-      localStorage.setItem('user', JSON.stringify(user));
-    }
-  }
-
-  getUser(): Promise<User> {
-    const userStored = localStorage.getItem('user');
-    if (userStored) {
-      return Promise.resolve(JSON.parse(userStored));
-    }
-    else {
-      return this.user();;
-    }
+    
+  setUser(user: User | null): void {
+    if (user) localStorage.setItem('user', JSON.stringify(user));
+    else localStorage.removeItem('user');    
+    this._currentUser.set(user);
   }
 
   revokeUser() {
@@ -49,12 +29,8 @@ export class UserService {
   }
 
   deleteUser() {
+    this.setUser(null);
     localStorage.removeItem('user');
   }
-
-  private handleError(error: any): void {
-    console.error(error);
-    alert(`Impossible de récupérer les informations du compte : ${error}`);
-  } 
 
 }

@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { HttpBackend, HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable } from 'rxjs';
 import { LoginPayload, SignupPayload, User } from 'src/app/models/user';
-import { UserService } from 'src/app/user/services/user.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,12 +10,9 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
   private readonly baseAuthUrl = `${environment.apiUrl}/Auth`;
   private readonly baseRegistrationUrl = `${environment.apiUrl}/Registration`;
-  private readonly baseXsrfUrl = `${environment.apiUrl}/Xsrf`;
-  
+  private readonly baseXsrfUrl = `${environment.apiUrl}/Xsrf`;  
 
-  constructor(private http: HttpClient) {
-    
-  }
+  constructor(private http: HttpClient) { }
 
   login$(user: LoginPayload): Observable<any> {
     let url = `${this.baseAuthUrl}/login`;
@@ -40,11 +35,6 @@ export class AuthenticationService {
       response => response.valid,
       () => false
     );
-  }
-
-  refreshToken(userGuid?: string) {
-    let url = `${this.baseAuthUrl}/refresh`;
-    return this.http.post(url, {UserId: userGuid}, {withCredentials: true});
   }
 
   xsrfToken(): Promise<any> {

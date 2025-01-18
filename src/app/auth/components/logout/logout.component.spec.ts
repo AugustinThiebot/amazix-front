@@ -9,7 +9,10 @@ describe('LogoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()]
+      providers: [
+        provideHttpClient(), 
+        provideHttpClientTesting()
+      ]
     })
     .compileComponents();
 

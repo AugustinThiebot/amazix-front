@@ -1,21 +1,22 @@
 import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
 import { tap } from 'rxjs';
-import { AuthenticationService } from '../services/authentication.service';
 import { inject } from '@angular/core';
 import { UserService } from 'src/app/user/services/user.service';
+import { RefreshTokenService } from '../services/refresh-token.service';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
-  const authService = inject(AuthenticationService);
+  const refreshTokenService = inject(RefreshTokenService);
   const userService = inject(UserService);
 
   const handleTokenRefresh = () => {
     var userGuid = userService.currentUser()?.userGuid;
-    authService.refreshToken(userGuid).subscribe({
+    refreshTokenService.refreshToken(userGuid).subscribe({
       error: (_err) => {
         userService.revokeUser();
       }
     });
   }
+
   return next(req).pipe(
     tap({
       next: (event) => {
